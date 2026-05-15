@@ -13,7 +13,7 @@ To do list:
 1) Make PoC (Proof of Concept)
 ...
 It should have barebones of the final project, like no gui and basic functionality.
-1.1 I'll player input choice.
+1.1 player input choice.
 1.2 cpu will generate choice.
 1.3 comparison of choices to decided a winner.
 1.4 win count and view.
