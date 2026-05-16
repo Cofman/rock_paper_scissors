@@ -15,7 +15,17 @@ function funcGameStart() {
     funcPlayerChoice();
     funcCPUChoice();
     if (playerChoice == cpuChoice) {
-        alert(`Huh, you both chose ${cpuChoice}. So, it's a draw!`);
+        let cpuChoiceWord = `Default`;
+        if (cpuChoice == 1) {
+            cpuChoiceWord = `Rock`;
+        }
+        else if (cpuChoice == 2) {
+            cpuChoiceWord = `Paper`;
+        }
+        else if (cpuChoice == 3) {
+            cpuChoiceWord = `Scissors`;
+        }
+        alert(`Huh, you both chose ${cpuChoiceWord}. So, it's a draw!`);
         alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
     }
     else if (playerChoice == 1 && cpuChoice == 2) {
@@ -48,6 +58,7 @@ function funcGameStart() {
         alert(`Scissors beats Paper!`);
         alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
     }
+    funcGameStart(playerChoice, cpuChoice);
 }
 
 funcGameStart(playerChoice, cpuChoice);
