@@ -5,7 +5,20 @@ let cpuChoice = 0;
 let choiceMain = `Default`;
 
 function funcPlayerChoice() {
-    playerChoice = prompt("1 = Rock, 2 = Paper, 3 = Scissors", 1);
+    playerChoice = prompt("What is your choice? Rock, Paper or Scissors?", "Rock").toLowerCase();
+    if (playerChoice == "rock" || playerChoice == "r") {
+        playerChoice = 1;
+    }
+    else if (playerChoice == "paper" || playerChoice == "p") {
+        playerChoice = 2;
+    }
+    else if (playerChoice == "scissors" || playerChoice == "s") {
+        playerChoice = 3;
+    }
+    else {
+        alert(`Stick to the rules.`);
+        funcGameStart(playerChoice, cpuChoice);
+    }
 }
 
 function funcCPUChoice() {
@@ -26,7 +39,7 @@ function funcGameStart() {
         else if (cpuChoice == 3) {
             cpuChoiceWord = `Scissors`;
         }
-        alert(`Huh, you both chose ${cpuChoiceWord}. So, it's a draw!`);
+        alert(`Huh, we both chose ${cpuChoiceWord}. It's a draw!`);
         alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
         rockPaperScissorsAgain();
     }
@@ -101,12 +114,9 @@ function rockPaperScissorsAgain() {
             alert(`Oh really? See you next time then.`);
             alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
         }
-
     }
     else {
         alert(`That doesn't answer my question...`);
         rockPaperScissorsAgain();
     }
 }
-
-rockPaperScissors();
