@@ -120,3 +120,4 @@ function rockPaperScissorsAgain() {
         rockPaperScissorsAgain();
     }
 }
+rockPaperScissors();
