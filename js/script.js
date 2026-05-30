@@ -3,30 +3,75 @@ let cpuScore = 0;
 let playerChoice = 0;
 let cpuChoice = 0;
 let choiceMain = `Default`;
-
-function funcPlayerChoice() {
-    playerChoice = prompt("What is your choice? Rock, Paper or Scissors?", "Rock").toLowerCase();
-    if (playerChoice == "rock" || playerChoice == "r") {
-        playerChoice = 1;
-    }
-    else if (playerChoice == "paper" || playerChoice == "p") {
-        playerChoice = 2;
-    }
-    else if (playerChoice == "scissors" || playerChoice == "s") {
-        playerChoice = 3;
-    }
-    else {
-        alert(`Stick to the rules.`);
-        funcGameStart(playerChoice, cpuChoice);
-    }
-}
+const btn_yes = document.getElementById(`btn_yes`);
+const btn_no = document.getElementById(`btn_no`);
+const sec_2 = document.getElementById(`sec_2`);
+const btn_rock = document.getElementById(`rock`);
+const btn_paper = document.getElementById(`paper`);
+const btn_scissors = document.getElementById(`scissors`);
+const html_player_score = document.getElementById(`html_player_score`);
+const html_cpu_score = document.getElementById(`html_cpu_score`);
+const clickSound = new Audio ('./audio/click.wav');
+const giggleSound = new Audio (`./audio/giggle.mp3`);
+const sec_15 = document.getElementById(`sec_15`);
+const body = document.getElementById(`body`);
 
 function funcCPUChoice() {
     cpuChoice = Math.floor(Math.random() * 3) + 1;
 }
 
+function cpuWhiteOut() {
+    html_cpu_score.classList.add(`white-out`);
+    setTimeout(() => {
+        html_cpu_score.classList.remove(`white-out`);
+    }, 1500);
+}
+
+function playerWhiteOut() {
+    html_player_score.classList.add(`white-out`);
+    setTimeout(() => {
+        html_player_score.classList.remove(`white-out`);
+    }, 1500);
+}
+
+function clickSoundPlay() {
+    clickSound.play();
+    clickSound.currentTime = 0;
+}
+
+function displayScore() {
+    sec_15.style.display = "flex";
+    html_player_score.textContent = `Player: ${playerScore}`;
+    html_cpu_score.textContent = `CPU: ${cpuScore}`;
+}
+
+function hideScore() {
+    sec_15.style.display = "none";
+}
+
+function displayBtnYN() {
+    btn_yes.style.display = "block";
+    btn_no.style.display = "block";
+}
+
+function hideBtnYN() {
+    btn_yes.style.display = "none";
+    btn_no.style.display = "none";
+}
+
+function displayBtnRPS() {
+    btn_rock.style.display = "block";
+    btn_paper.style.display = "block";
+    btn_scissors.style.display = "block";
+}
+
+function hideBtnRPS() {
+    btn_rock.style.display = "none";
+    btn_paper.style.display = "none";
+    btn_scissors.style.display = "none";
+}
+
 function funcGameStart() {
-    funcPlayerChoice();
     funcCPUChoice();
     if (playerChoice == cpuChoice) {
         let cpuChoiceWord = `Default`;
@@ -39,85 +84,99 @@ function funcGameStart() {
         else if (cpuChoice == 3) {
             cpuChoiceWord = `Scissors`;
         }
-        alert(`Huh, we both chose ${cpuChoiceWord}. It's a draw!`);
-        alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = `Huh, we both chose ${cpuChoiceWord}. It's a draw!`;
     }
     else if (playerChoice == 1 && cpuChoice == 2) {
         cpuScore += 1;
-        alert(`Rock loses to Paper!`);
-        alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = `Rock loses to Paper!`;
+        cpuWhiteOut();
     }
     else if (playerChoice == 1 && cpuChoice == 3) {
         playerScore +=1;
-        alert(`Rock beats Scissors!`);
-        alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = `Rock beats Scissors!`;
+        playerWhiteOut()
     }
     else if (playerChoice == 2 && cpuChoice == 1) {
         playerScore +=1;
-        alert(`Paper beats Rock!`)
-        alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = `Paper beats Rock!`;
+        playerWhiteOut()
     }
     else if (playerChoice == 2 && cpuChoice == 3) {
         cpuScore +=1;
-        alert(`Paper loses to Scissors!`);
-        alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = `Paper loses to Scissors!`;
+        cpuWhiteOut();
     }
     else if (playerChoice == 3 && cpuChoice == 1) {
         cpuScore +=1;
-        alert(`Scissors loses to Rock!`);
-        alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = `Scissors loses to Rock!`;
+        cpuWhiteOut();
     }
     else if (playerChoice == 3 && cpuChoice == 2) {
         playerScore +=1;
-        alert(`Scissors beats Paper!`);
-        alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = `Scissors beats Paper!`;
+        playerWhiteOut()
     }
-    else {
-        alert(`Stick to the rules.`);
-        funcGameStart(playerChoice, cpuChoice);
-    }
+    updateScore();
 }
 
-function rockPaperScissors() {
-    
-    choiceMain = prompt(`Wanna play Rock, Paper, Scissors? \n Yes or No?`).toLowerCase();
-    if (choiceMain == `yes` || choiceMain == `y`) {
-        funcGameStart(playerChoice, cpuChoice);
-    }
-    else if (choiceMain == `no` || choiceMain == `n`) {
-        alert(`Oh really? See you next time then.`);
-    }
-    else {
-        alert(`That doesn't answer my question...`);
-        rockPaperScissors();
-    }
+function updateScore() {
+    html_player_score.textContent = `Player: ${playerScore}`;
+    html_cpu_score.textContent = `CPU: ${cpuScore}`;
 }
 
-function rockPaperScissorsAgain() {
-    choiceMain = prompt(`Wanna play again? \n Yes or No?`).toLowerCase();
-    if (choiceMain == `yes` || choiceMain == `y`) {
-        funcGameStart(playerChoice, cpuChoice);
-    }
-    else if (choiceMain == `no` || choiceMain == `n`) {
-        if (playerScore < cpuScore) {
-            alert(`Oh really? See you next time then, loser.`);
-            alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        }
-        else {
-            alert(`Oh really? See you next time then.`);
-            alert(`Score: Player: ${playerScore} || CPU: ${cpuScore}`);
-        }
+function playAgain() {
+    hideBtnRPS();
+    setTimeout(() => {
+        sec_2.textContent = "Wanna play again?";
+        displayBtnYN();
+    }, 2000);
+}
+
+function exit() {
+    setTimeout(() => {
+        body.style.display = "none";
+    }, 2000);
+}
+
+btn_yes.addEventListener(`click`, () => {
+    sec_2.textContent = "What is your choice?"
+    hideBtnYN();
+    displayBtnRPS();
+    clickSoundPlay();
+    displayScore();
+})
+
+btn_no.addEventListener(`click`, () => {
+    if (playerScore < cpuScore) {
+        sec_2.textContent = "Oh really? See you next time then, loser"
+        hideBtnYN();
+        giggleSound.play();
     }
     else {
-        alert(`That doesn't answer my question...`);
-        rockPaperScissorsAgain();
+        sec_2.textContent = "Oh really? See you next time then"
+        hideBtnYN();
+        clickSoundPlay();
     }
-}
-rockPaperScissors();
+    exit();
+})
+
+btn_rock.addEventListener(`click`, () => {
+    playerChoice = 1;
+    funcGameStart();
+    clickSoundPlay();
+    playAgain();
+})
+
+btn_paper.addEventListener(`click`, () => {
+    playerChoice = 2;
+    funcGameStart();
+    clickSoundPlay();
+    playAgain();
+})
+
+btn_scissors.addEventListener(`click`, () => {
+    playerChoice = 3;
+    funcGameStart();
+    clickSoundPlay();
+    playAgain();
+})
