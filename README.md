@@ -23,3 +23,7 @@ It should have barebones of the final project, like no gui and basic functionali
 
 3) Beta version 
 3.1 gui.
+
+
+PS: I did everything beforehand with the instructions from **Project: Rock Paper Scissors
+Introduction**, which is why the result may look unfair to students and incorrect later, since there's no loops used.
